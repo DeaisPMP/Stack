@@ -2,10 +2,7 @@
 #include <map>
 #include <unordered_map>
 #include <queue>
-
-#if 0
-#define __DEBUG__
-#endif
+#include <gtest/gtest.h>
 
 template<typename T>
 class Stack
@@ -15,9 +12,10 @@ class Stack
         List* next;
         List* prev;
         List* up;
+        List* hd;
         T     val;
         List()
-        : next(nullptr), prev(nullptr), up(nullptr)
+        : next(nullptr), prev(nullptr), up(nullptr), hd(nullptr)
         {}
     };
     List*  head;
@@ -51,9 +49,16 @@ public:
         else
         {
             auto l = f->second;
-            while(l->up)
-                l = l->up;
-            l->up = head;
+            if(l->up == nullptr)
+            {
+                l->up = head;
+                l->hd = head;
+            }
+            else
+            {
+                l->hd->up = head;
+                l->hd = head;
+            }
         }
     }
     void pop()
@@ -95,7 +100,7 @@ public:
     T top()
     {
         if(head == nullptr)
-            throw "Stack is empty!";
+            return T();
         return head->val;
     }
 #ifdef __DEBUG__
@@ -112,82 +117,53 @@ public:
 #endif
 };
 
-int main(int argc, char* argv[])
+TEST(Stack, Top)
 {
-    (void)argc;
-    (void)argv;
-    
     Stack<int> s;
     
-    /*
-    s.push(5);
-    s.Print();
-    s.push(3);
-    s.Print();
-    s.push(2);
-    s.Print();
+    EXPECT_EQ(int(), s.top());
+}
+
+TEST(Stack, PopE)
+{
+    Stack<int> s;
     s.pop();
-    s.Print();
+}
+
+TEST(Stack, Push)
+{
+    Stack<int> s;
     s.push(5);
-    s.Print();
-    s.pop();
-    s.Print();
-    */
-    
-    /*
-    s.push(5);
-    s.Print();
-    s.pop();
-    s.Print();
-    */
-    
-#ifdef __DEBUG__
-    s.push(5);
-    s.Print();
-    s.push(1);
-    s.Print();
-    s.push(3);
-    s.Print();
-    s.push(5);
-    s.Print();
-    s.push(4);
-    s.Print();
     s.push(6);
-    s.Print();
-    s.pop();
-    s.Print();
-    s.pop();
-    s.Print();
-    s.pop();
-    s.Print();
-    s.push(5);
-    s.Print();
-    s.push(8);
-    s.Print();
-    s.push(5);
-    s.Print();
-    s.push(4);
-    s.Print();
+    s.push(7);
+    EXPECT_EQ(7, s.top());
+}
+
+TEST(Stack, Pop)
+{
+    Stack<int> s;
+    s.push(1);
+    s.push(2);
     s.push(3);
-    s.Print();
     s.pop();
-    s.Print();
+    EXPECT_EQ(2, s.top());
+}
+
+TEST(Stack, PopDeq)
+{
+    Stack<int> s;
+    s.push(5);
+    s.push(3);
+    s.push(2);
     s.pop();
-    s.Print();
+    EXPECT_EQ(3, s.top());
+    s.push(5);
     s.pop();
-    s.Print();
-    s.pop();
-    s.Print();
-    s.pop();
-    s.Print();
-    s.pop();
-    s.Print();
-    s.pop();
-    s.Print();
-    s.pop();
-    s.Print();
-#endif
-    
-    
-    return (0);
+    EXPECT_EQ(5, s.top());
+}
+
+int main(int argc, char* argv[])
+{
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
