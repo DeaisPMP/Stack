@@ -141,7 +141,7 @@ int main(int argc, char* argv[])
     s.Print();
     */
     
-    /*
+#ifdef __DEBUG__
     s.push(5);
     s.Print();
     s.push(1);
@@ -186,7 +186,8 @@ int main(int argc, char* argv[])
     s.Print();
     s.pop_f();
     s.Print();
-    */
+#endif
+    
     
     return (0);
 }
