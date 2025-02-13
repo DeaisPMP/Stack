@@ -56,7 +56,7 @@ public:
             l->up = head;
         }
     }
-    void pop_f()
+    void pop()
     {
         if(head)
         {
@@ -126,18 +126,18 @@ int main(int argc, char* argv[])
     s.Print();
     s.push(2);
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
     s.push(5);
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
     */
     
     /*
     s.push(5);
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
     */
     
@@ -154,11 +154,11 @@ int main(int argc, char* argv[])
     s.Print();
     s.push(6);
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
     s.push(5);
     s.Print();
@@ -170,21 +170,21 @@ int main(int argc, char* argv[])
     s.Print();
     s.push(3);
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
-    s.pop_f();
+    s.pop();
     s.Print();
 #endif
     
